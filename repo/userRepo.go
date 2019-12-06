@@ -5,7 +5,7 @@ import (
 
 // AddUser adds a user to our pg db
 func (r Repository) AddUser(u domain.User) (*domain.User, error){
-	
+	r.db.Create(&u)
 	return nil, nil
 }
 // UpdateUser updates the user in our pg db

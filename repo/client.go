@@ -2,43 +2,28 @@ package repo
 
 
 import (
-	"github.com/go-pg/pg/v9"
-	"github.com/go-pg/pg/v9/orm"
-	"fix-my-driveway/domain"
+	"github.com/jinzhu/gorm"
+	// We need the postgres driver
+  _ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 // Repository yup
 type Repository struct {
-	db *pg.DB
+	db *gorm.DB
 }
 
 
 // NewRepo will be used to create a database client
-func NewRepo() Repository {
+func NewRepo() (*Repository, error) {
 
 	// Figure out the options
-	db := pg.Connect(&pg.Options{
-        User: "postgres",
-	})
-	
-	defer db.Close()
-
-	err := createSchema(db)
+	db, err := gorm.Open("postgres")
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
+	defer db.Close()
+	
+	
 
-	return Repository {db}
-}
-
-func createSchema(db *pg.DB) error {
-    for _, model := range []interface{}{(*domain.User)(nil),(*domain.TimeEntry)(nil)} {
-        err := db.CreateTable(model, &orm.CreateTableOptions{
-            Temp: true,
-        })
-        if err != nil {
-            return err
-        }
-    }
-    return nil
+	return &Repository{db}, nil
 }
