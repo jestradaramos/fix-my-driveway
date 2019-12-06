@@ -10,5 +10,6 @@ func (r Repository) AddUser(u domain.User) (*domain.User, error){
 }
 // UpdateUser updates the user in our pg db
 func (r Repository) UpdateUser(u domain.User) (*domain.User, error) {
+	r.db.Save(u)
 	return nil, nil
 }
