@@ -22,5 +22,6 @@ RUN apt-get update \
   golang.org/x/tools/cmd/goimports \
   golang.org/x/lint/golint 2>&1 
 
-  RUN go mod vendor
+RUN go mod vendor
 RUN go mod tidy
+
