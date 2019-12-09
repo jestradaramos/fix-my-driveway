@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  database: 
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      - POSTGRES_PASSWORD=docker
+    ports:
+      - "5432:5432"
+  web:
+    build: ./
+    command: ./main
+    container_name: Web_App
+    ports:
+      - "8080:80"
+    depends_on:
+      - database

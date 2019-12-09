@@ -24,4 +24,4 @@ RUN apt-get update \
 
 RUN go mod vendor
 RUN go mod tidy
-
+RUN go build main.go

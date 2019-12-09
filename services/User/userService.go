@@ -15,12 +15,12 @@ func NewUserService(repo domain.Repo) UserService {
 }
 
 // AddUser adds a user to our system
-func (s UserService) AddUser(u domain.User) (*domain.User, error) {
-	user, err := s.repo.AddUser(u)
+func (s UserService) AddUser(u *domain.User) (*domain.User, error) {
+	err := s.repo.AddUser(u)
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
+	return nil, nil
 }
 
 // UpdateUser is for making any changes to the user information
