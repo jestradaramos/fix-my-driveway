@@ -27,7 +27,7 @@ func InitDatabase(url *url.URL) (*Repository, error) {
 
 	db.DB().SetMaxIdleConns(20)
 	db.DB().SetMaxOpenConns(20)
-	defer db.Close()
+	//defer db.Close()
 	
 	
 

@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fix-my-driveway/domain"
 	"fix-my-driveway/repo"
 	"fmt"
 	"net/url"
@@ -19,14 +20,26 @@ func NewApp()(*App, error){
 	if err != nil {
 		return nil, err
 	}
-	fmt.Print("WE PARSED THE URL!")
+
 	db, err := repo.InitDatabase(dbURL)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Print("WE INIT THE DB")
+
+	// Init all the tables
 	db.InitUserTable()
-	fmt.Print("IT WORKED!")
+
+	// Testing Delete later
+	u := &domain.User{
+		Name: "Jeff",
+		Email: "email",
+		Password: "pwd",
+	}
+	err = db.AddUser(u)
+	if err != nil {
+		return nil, err
+	}
+	fmt.Print("WE HERE")
 	return app, nil
 }
 

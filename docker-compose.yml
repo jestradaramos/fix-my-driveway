@@ -12,6 +12,7 @@ services:
     build: ./
     command: ./main
     container_name: Web_App
+    restart: on-failure
     ports:
       - "8080:80"
     depends_on:
